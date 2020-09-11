@@ -43,3 +43,7 @@ End;
 # Install Dapper ORM
 
 **Install-Package Dapper**
+
+# Install Oracle Manage Data Access for Core
+
+**Install-Package Oracle.ManagedDataAccess.Core**
