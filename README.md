@@ -1,4 +1,4 @@
-﻿# WebAPIwithOracleDapper
+# Setup Oracle Table and Stored Procedures
 
 [منیع](http://www.mukeshkumar.net/articles/aspnetcore/asp-net-core-web-api-with-oracle-database-and-dapper)
 
@@ -8,10 +8,10 @@ You can use the following syntax to create the table inside oracle database.
 ```
 CREATE TABLE "TEST_DB"."EMPLOYEE" 
 (	
-    "ID" NUMBER(10), 
-	"NAME" VARCHAR2(255), 
-	"SALARY" NUMBER(10), 
-	"ADDRESS" VARCHAR2(500)
+   "ID" NUMBER(10), 
+   "NAME" VARCHAR2(255), 
+   "SALARY" NUMBER(10), 
+   "ADDRESS" VARCHAR2(500)
 )
 ```
 
@@ -25,3 +25,21 @@ Insert into TEST_DB.EMPLOYEE (ID,NAME,SALARY,ADDRESS) values (102,'Mahesh',10000
 Insert into TEST_DB.EMPLOYEE (ID,NAME,SALARY,ADDRESS) values (103,'Banky',20000,'India');
 ```
 
+Now its time to create one SP which will bring the list of employees records. 
+Here we are using Cursor for returning list of data as an output parameter.
+
+```
+CREATE OR REPLACE PROCEDURE "TEST_DB"."USP_GETEMPLOYEES" (
+   EMPCURSOR OUT SYS_REFCURSOR
+)
+AS
+Begin
+   Open EMPCURSOR For
+   SELECT ID, NAME, SALARY,ADDRESS FROM Employee;
+End;
+```
+---
+
+# Install Dapper ORM
+
+**Install-Package Dapper**
